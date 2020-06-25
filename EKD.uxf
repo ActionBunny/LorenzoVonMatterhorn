@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>32</y>
+      <w>528</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>bg=green
+/Produktionseinrichtung/
+--
+-_Name:String
+-_ListeAusfuehrbarerVerarbeitungsschritte: List&lt;Tuple&lt;Verarbeitungsschritt,int&gt; &gt;
+--
++GetName():String
++GetAusfuehrbareVerarbeitungsschritteUndDauer():List&lt;Tuple&lt;Verarbeitungsschritt,int&gt; &gt;
+/+BerechneStatus():Status/
++Produktionseinrichtung(name: String, faehigkeiten: List&lt;Tuple&lt;Verarbeitungsschritt,int&gt;&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>224</x>
+      <y>424</y>
+      <w>472</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Fertigungsinsel
+--
+-_BelegtBis:DateTime
+--
++Fertigungsinsel(name: String, faehigkeiten List&lt;Tupel&lt;Verarbeitungsschritt,int&gt; &gt;)
++GetBearbeitungsdauerFuerSchritt(schritt: Verarbeitungsschritt) : int
++TeilZurueckgeben():Teil
++TeilEntgegennehmen(t: Teil):void
++BerechneStatus():Status
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>144</y>
+      <w>24</w>
+      <h>296</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>224</x>
+      <y>48</y>
+      <w>168</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;enum&gt;&gt;
+Verarbeitungsschritt
+--
+INITIALISIEREN
+LOETEN
+FRAESEN
+TRENNEN
+BESCHICHTEN
+EINLAGERN
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>352</y>
+      <w>112</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=0..1
+r1= -_AktuellesTeil
+
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>64</x>
+      <y>352</y>
+      <w>816</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=*
+m2=0..1
+r1= -_BestandZuBearbeiten
+ </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;470.0;970.0;470.0;970.0;430.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>232</y>
+      <w>472</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Fertigungsabteilung
+--
+-
++InitProduktionseinrichtung():Produktionseinrichtung
++RegisterProduktionseinrichtungAmRoboter(prodEinrichtung: Produktionseinrichtung):bool
+-LiesKonfigDatei(pathToFile: String):bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>848</x>
+      <y>384</y>
+      <w>576</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>TransportRoboter
+--
+-_Name: String
+--
++Start():void
+-GetAbholbereiteProduktionseinrichtung():Produktionseinrichtung
+-GetSchnellsteFertigungsinsel():Fertigungsinsel
++RegistriereProduktionsEinrichtungen(produktionseinrichtungen: List&lt;Produktionseinrichtung&gt;):void 
++TransportRoboter(name: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>440</y>
+      <w>176</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=0..1
+r1= -_Fertigungsinseln
+
+ </panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1232</x>
+      <y>296</y>
+      <w>80</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+m1=0..1
+m2=1
+r1= -_Roboter
+
+ </panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>592</y>
+      <w>440</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>EingangsLager
+--
+--
+-InitialisiereTeil(pfadZuCSV: String):bool
++TeilZwischenlagern(t: Teil)
++TeilAusgeben(): Teil
++BerechneStatus():Status
++AusgangsLager(name: String, faehigkeiten: List&lt;Tuple&lt;Verarbeitungsschritt,int&gt;&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>144</y>
+      <w>24</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+</panel_attributes>
+    <additional_attributes>10.0;560.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>592</y>
+      <w>432</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>AusgangsLager
+--
+--
+-GibHistorieAus(t: Teil):void
++TeilFuerDenVersandEmpfangen(t: Teil):void
++BerechneStatus():Status
++AusgangsLager(name: String, faehigkeiten: List&lt;Tuple&lt;Verarbeitungsschritt, int&gt;&gt;)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>144</y>
+      <w>24</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+</panel_attributes>
+    <additional_attributes>10.0;560.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>144</y>
+      <w>184</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+m1=0..*
+m2=1
+r1= -_Produktionseinrichtungen
+
+
+
+ </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>208</x>
+      <y>352</y>
+      <w>160</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=*
+m2=0..1
+r1= -_BestandAbgearbeitet
+ </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;350.0;90.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>40</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;enum&gt;&gt;
+Status
+--
+EMPFANGSBEREIT
+ABHOLBEREIT
+BELEGT 
+GESTOERT </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>200</y>
+      <w>504</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Teil
+--
+-_Rezept:List&lt;Verarbeitungsschritt&gt;
+-_Historie:List&lt;Tuple&lt;Verarbeitungsschritt,String&gt;&gt;
+-_Seriennummer:String 
+--
++GetNaechsterSchritt():Verarbeitungsschritt
++TransferiereSchrittInHistorie(bearbeitetIn: Produktionseinrichtung):Verarbeitungsschritt
++GetSeriennummer():String
++SelbstTestTeil():bool
++LiefereHistorie():List&lt;Tupel&lt;Verarbeitungsschritt,String&gt;&gt;
++Teil(rezept: List&lt;VERARBEITUNGSSCHRIT&gt;, seriennummer: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>488</y>
+      <w>528</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=0..1
+r1= -_Ausgangslager
+ </panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;80.0;610.0;80.0;610.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1184</x>
+      <y>488</y>
+      <w>120</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=0..1
+r1= -_Eingangslager
+
+ </panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>536</x>
+      <y>320</y>
+      <w>392</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=0..1
+r1= -_AktuellesTeil
+
+</panel_attributes>
+    <additional_attributes>10.0;20.0;440.0;20.0;440.0;80.0</additional_attributes>
+  </element>
+</diagram>

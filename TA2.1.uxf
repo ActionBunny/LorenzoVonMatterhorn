@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>9</x>
+      <y>288</y>
+      <w>18</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>198</x>
+      <y>279</y>
+      <w>180</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>EMPFANGSBEREIT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>666</x>
+      <y>540</y>
+      <w>180</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>BELEGT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>189</x>
+      <y>540</y>
+      <w>180</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>ABHOLBEREIT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>9</x>
+      <y>279</y>
+      <w>207</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>369</x>
+      <y>279</y>
+      <w>477</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+TeilEntgegennehmen() [_AktuellesTeil != null]</panel_attributes>
+    <additional_attributes>10.0;20.0;510.0;20.0;510.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>540</y>
+      <w>324</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+BerechneStatus()
+[Endzeitpunkt erreicht  
+&amp;&amp; kein weiterer Schritt möglich]</panel_attributes>
+    <additional_attributes>340.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>306</y>
+      <w>135</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+TeilZurueckgeben()</panel_attributes>
+    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>765</x>
+      <y>549</y>
+      <w>396</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+BerechneStatus()
+[(!Endzeitpunkt || weiterer Schritt möglich) 
+&amp;&amp; _AktuelesTeil != null]
+fg=gray</panel_attributes>
+    <additional_attributes>90.0;10.0;160.0;10.0;160.0;80.0;10.0;80.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>81</x>
+      <y>549</y>
+      <w>225</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+BerechneStatus()
+[(Endzeitpunkt erreicht 
+|| kein weiterer Schritt möglich) 
+&amp;&amp; _AktuelesTeil != null]
+fg=gray
+
+</panel_attributes>
+    <additional_attributes>230.0;30.0;230.0;100.0;10.0;100.0;10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>171</y>
+      <w>243</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+BerechneStatus()[(_AktuelesTeil == null]
+fg=gray</panel_attributes>
+    <additional_attributes>80.0;120.0;80.0;20.0;180.0;20.0;180.0;120.0</additional_attributes>
+  </element>
+</diagram>

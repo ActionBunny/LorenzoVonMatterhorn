@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beleg2020", "Beleg2020\Beleg2020.csproj", "{487EAA03-9FF6-47FE-86CC-4990F1814C33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{487EAA03-9FF6-47FE-86CC-4990F1814C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487EAA03-9FF6-47FE-86CC-4990F1814C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487EAA03-9FF6-47FE-86CC-4990F1814C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487EAA03-9FF6-47FE-86CC-4990F1814C33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {213F0032-E9D1-450E-8B6B-824B8B95C9CA}
+	EndGlobalSection
+EndGlobal
