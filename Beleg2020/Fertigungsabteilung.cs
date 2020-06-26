@@ -8,6 +8,7 @@ namespace Beleg2020
     class Fertigungsabteilung
     {
         static public TransportRoboter roboter = new TransportRoboter();
+        static public List<Produktionseinrichtung> produktionseinrichtungen = new List<Produktionseinrichtung>();
 
         static private bool firstLine = true;
         
@@ -40,7 +41,6 @@ namespace Beleg2020
                 ListeFähigkeitenMitDauer = new List<Tuple<Verarbeitungsschritt, int>>();
                 for (int i = 1; i < strings.Length; i++)
                 {
-
                     var s = strings[i].Split(':');
                     ListeFähigkeitenMitDauer.Add(
                         new Tuple<Verarbeitungsschritt, int>(
@@ -53,27 +53,32 @@ namespace Beleg2020
                 /**
                  * Hier werden die eigentlichen Objekte erzeugt. 
                  **/
+
                 #region 
                 if (ListeFähigkeitenMitDauer.Any(x => x.Item1 == Verarbeitungsschritt.INITIALISIEREN))
                 {
-                    // Denken Sie daran, das/die Objekt(e) für den entsprechenden Typ von Produktionseinrichtung hier zu erzeugen
-                    // Rufen Sie dafür hier den Konstruktor des ensprechenden Typs auf und speichern Sie das Objekt in einer passenden Datenstruktur.
-
                     // erstelle Eingangslager
-                    continue;
-                };
+                   EingangsLager lager = new EingangsLager("Eingangslager", ListeFähigkeitenMitDauer);
+                   produktionseinrichtungen.Add(lager);
+                   continue;
+                }
+
                 if (ListeFähigkeitenMitDauer.Any(x => x.Item1 == Verarbeitungsschritt.EINLAGERN))
                 {
-                    // Denken Sie daran, das/die Objekt(e) für den entsprechenden Typ von Produktionseinrichtung hier zu erzeugen
-                    // Rufen Sie dafür hier den Konstruktor des ensprechenden Typs auf und speichern Sie das Objekt in einer passenden Datenstruktur.
-
-                    //erstelle Ausgangslager
+                    // erstelle Ausgangslager
+                    AusgangsLager lager = new AusgangsLager("Ausgangslager", ListeFähigkeitenMitDauer);
+                    produktionseinrichtungen.Add(lager);
                     continue;
                 }
-                // Denken Sie daran, das/die Objekt(e) für den entsprechenden Typ von Produktionseinrichtung hier zu erzeugen!
-                // Rufen Sie dafür hier den Konstruktor des ensprechenden Typs auf und speichern Sie das Objekt in einer passenden Datenstruktur.
 
-                //erstelle Fertigungsinseln
+                //TODO: abfrage ist unlogisch (geht aber)
+                if (ListeFähigkeitenMitDauer.Any(x => (x.Item1 != Verarbeitungsschritt.EINLAGERN) && (x.Item1 != Verarbeitungsschritt.INITIALISIEREN)))
+                {
+                    //erstelle Fertigungsinsel
+                    Fertigungsinsel fertigungsinsel = new Fertigungsinsel("Fertigungsinsel", ListeFähigkeitenMitDauer);
+                    produktionseinrichtungen.Add(fertigungsinsel);
+                    continue;
+                }
 
                 #endregion
             }
@@ -87,7 +92,6 @@ namespace Beleg2020
 
         private static bool RegistriereProduktionseinrichtungenAmRoboter()
         {
-            // throw new NotImplementedException("Hier sollten Sie noch Inhalt einfüllen");
             return roboter.RegistriereProduktionsEinrichtungen();
         }
         /// <summary>
@@ -96,12 +100,9 @@ namespace Beleg2020
         /// <returns></returns>
         private static bool InitProduktionseinrichtungen() 
         {
-            
             Console.WriteLine("Initialisieren der Produktionseinrichtungen gestartet!");
-
             Console.WriteLine("Konfigurationsdatei wird zum Einlesen vorbereitet!");
-            return LiesKonfig("Config.csv");
-            
+            return LiesKonfig("..//..//..//Config.csv");
         }
         #endregion
 
