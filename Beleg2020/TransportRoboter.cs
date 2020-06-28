@@ -14,13 +14,13 @@ namespace Beleg2020
         public void Start(){
 
         }
-
+        /*
         private Produktionseinrichtung GetAbholbereiteProduktionseinrichtung(){
 
         }
 
         private Fertigungsinsel GetSchnellsteFertigungsinsel(){
 
-        }
+        }*/
     }
 }
