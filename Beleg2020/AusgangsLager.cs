@@ -4,15 +4,7 @@ using System.Text;
 
 namespace Beleg2020
 {
-    public class AusgangsLager : Produktionseinrichtung
-    {
-        public AusgangsLager(string name, List<Tuple<Verarbeitungsschritt, int>> faehigkeiten)
-        {
-            _Name = name;
-            _ListeAusfuehrbarerVerarbeitungsschritte = faehigkeiten;
-        }
-    
-        /*
+    class AusgangsLager{
         private void GibHistorieAus(){
             
         }
@@ -23,6 +15,7 @@ namespace Beleg2020
 
         public Status BerechneStatus(){
             //Status zurückgeben
-        }*/
+        }
+
     }
 }

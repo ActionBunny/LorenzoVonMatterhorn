@@ -4,20 +4,20 @@ using System.Text;
 
 namespace Beleg2020
 {
-    public class Produktionseinrichtung
+    class Produktionseinrichtung
     {
-        public string _Name;
-        public List<Tuple<Verarbeitungsschritt, int>> _ListeAusfuehrbarerVerarbeitungsschritte;
+        private String _Name;
+        private List<Tuple<Verarbeitungsschritt, int>> _ListeAusfuehrbarerVerarbeitungsschritte;
 
         public String GetName(){
             return _Name;
         }
 
-        /*public List<Tuple<Verarbeitungsschritt, int>> GetAusfuehrbareVerarbeitungsschritteUndDauer(){
+        public List<Tuple<Verarbeitungsschritt, int>> GetAusfuehrbareVerarbeitungsschritteUndDauer(){
             return _ListeAusfuehrbarerVerarbeitungsschritte;
         }
         public Status BerechneStatus(){
             //Status zurückgeben
-        }*/
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Beleg2020
          private List<Verarbeitungsschritt> _Rezept;
          private List<Tuple<Verarbeitungsschritt, String>> _Historie;
          private String _Seriennummer;
-        /*
+
          public Teil(List<Verarbeitungsschritt> rezept, String _Seriennummer)
          {
          }
@@ -47,8 +47,8 @@ namespace Beleg2020
 
          }
 
-         public List<Tuple<Verarbeitungsschritt,String>> LiefereHistorie(){
+         public List<Tupel<Verarbeitungsschritt,String>> LiefereHistorie(){
 
-         }*/
+         }
     }
 }
