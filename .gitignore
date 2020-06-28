@@ -501,5 +501,4 @@ _NCrunch*
 .vs/VSWorkspaceState.json
 .vscode/launch.json
 .vscode/tasks.json
-.vs/*
-Beleg2020/.vscode/*
+
