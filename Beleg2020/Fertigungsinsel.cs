@@ -7,7 +7,7 @@ namespace Beleg2020
     class Fertigungsinsel
     {
         private DateTime _BelegtBis;
-
+        
         public void TeilEntgegennehmen(Teil t){
 
         }
