@@ -7,7 +7,7 @@ namespace Beleg2020
     class EingangsLager
     {
         private bool (String pfadZuCSV){
-            return true;
+
         }
         
         public Teil TeilAusgeben(){

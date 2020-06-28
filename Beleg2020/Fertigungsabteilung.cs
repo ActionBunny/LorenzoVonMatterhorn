@@ -60,7 +60,6 @@ namespace Beleg2020
                     // Rufen Sie dafür hier den Konstruktor des ensprechenden Typs auf und speichern Sie das Objekt in einer passenden Datenstruktur.
 
                     // erstelle Eingangslager
-                    
                     continue;
                 };
                 if (ListeFähigkeitenMitDauer.Any(x => x.Item1 == Verarbeitungsschritt.EINLAGERN))
