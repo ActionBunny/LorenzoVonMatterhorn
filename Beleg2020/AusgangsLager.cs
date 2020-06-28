@@ -11,18 +11,24 @@ namespace Beleg2020
             _Name = name;
             _ListeAusfuehrbarerVerarbeitungsschritte = faehigkeiten;
         }
-    
-        /*
-        private void GibHistorieAus(){
-            
+
+        public override Status BerechneStatus()
+        {
+            return Status.EMPFANGSBEREIT;
+        }
+        
+        private void GibHistorieAus(Teil t)
+        {
+            string serienNummer = t.GetSeriennummer();
+            foreach (Tuple<Verarbeitungsschritt, string> historienEintrag in t.LiefereHistorie())
+            {
+                Console.WriteLine("Teil mit der Seriennummer" + serienNummer + "wurde mit Schritt " + historienEintrag.Item1 + "bearbeitet von Maschine " + historienEintrag.Item2);
+            }
         }
 
-        public void TeilFuerDenVersandEmpfangen(Teil t){
-
+        public void TeilFuerDenVersandEmpfangen(Teil t)
+        {
+            throw new NotImplementedException();
         }
-
-        public Status BerechneStatus(){
-            //Status zurückgeben
-        }*/
     }
 }

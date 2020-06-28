@@ -5,6 +5,25 @@ using System.Linq;
 
 namespace Beleg2020
 {
+    // TODO: WICHTIG
+    // "Achten Sie darauf, dass mehrere aufeinander folgende, auf der aktuellen Fertigungsinsel
+    // durchführbare Rezeptschritte auch auf dieser Fertigungsinsel durchgeführt werden."
+
+
+
+    // x Initialisiere fertigungsabteilung
+    // x erstelle liste produktionse.
+    // x sende liste an roboter
+    // x starte roboter
+    // befülle e lager
+    // -> lese teil aus csv
+    // -> instanziiere teile
+    // -> füge zum e lager hinzu
+    // 
+    //
+    //
+    //
+
     class Fertigungsabteilung
     {
         static public TransportRoboter roboter = new TransportRoboter();
@@ -12,20 +31,6 @@ namespace Beleg2020
 
         static private bool firstLine = true;
         
-        #region Funktionen per UML
-        /// <summary>
-        /// Diese Funktion liest die Anlagenkonfiguration aus der Config.csv.
-        /// Sie können das hier gezeigte Vorgehen im Eingangslager adaptieren, 
-        /// um dort die Teile zu erzeugen.
-        /// 
-        /// Beachten Sie bitte, das die .csv-Datein im Hauptverzeichniss des Projektes liegen!
-        /// Da VisualStudio, je nach Ihrer Konfiguration, das ausführbare Projekt im debug- oder 
-        /// release Unterordner erzeugt müssen die den Pfad von dort aus zu den .csv-Datein angeben.
-        /// z.B. "..\\..\\..\\Config.csv", was hier genaugenommen bedeutet, gehe drei Verzeichnissebenen
-        /// nach oben, dort sind die entsprechenden Datein zu finden.
-        /// </summary>
-        /// <param name="path">der relative Pfad zu .csv Datei</param>
-        /// <returns></returns>
         private static bool LiesKonfig(String path)
         {
             List<Tuple<Verarbeitungsschritt, int>> ListeFähigkeitenMitDauer;
@@ -58,7 +63,7 @@ namespace Beleg2020
                 if (ListeFähigkeitenMitDauer.Any(x => x.Item1 == Verarbeitungsschritt.INITIALISIEREN))
                 {
                     // erstelle Eingangslager
-                   EingangsLager lager = new EingangsLager("Eingangslager", ListeFähigkeitenMitDauer);
+                   EingangsLager lager = new EingangsLager(name, ListeFähigkeitenMitDauer);
                    produktionseinrichtungen.Add(lager);
                    continue;
                 }
@@ -66,7 +71,7 @@ namespace Beleg2020
                 if (ListeFähigkeitenMitDauer.Any(x => x.Item1 == Verarbeitungsschritt.EINLAGERN))
                 {
                     // erstelle Ausgangslager
-                    AusgangsLager lager = new AusgangsLager("Ausgangslager", ListeFähigkeitenMitDauer);
+                    AusgangsLager lager = new AusgangsLager(name, ListeFähigkeitenMitDauer);
                     produktionseinrichtungen.Add(lager);
                     continue;
                 }
@@ -75,15 +80,14 @@ namespace Beleg2020
                 if (ListeFähigkeitenMitDauer.Any(x => (x.Item1 != Verarbeitungsschritt.EINLAGERN) && (x.Item1 != Verarbeitungsschritt.INITIALISIEREN)))
                 {
                     //erstelle Fertigungsinsel
-                    Fertigungsinsel fertigungsinsel = new Fertigungsinsel("Fertigungsinsel", ListeFähigkeitenMitDauer);
+                    Fertigungsinsel fertigungsinsel = new Fertigungsinsel(name, ListeFähigkeitenMitDauer);
                     produktionseinrichtungen.Add(fertigungsinsel);
                     continue;
                 }
-
-                #endregion
             }
             return true;
         }
+
         /// <summary>
         /// Diese Funktion ist nicht besonders umfangreich, sie registriert die erzeugten 
         /// Produktionseinrichtungen lediglich am Roboter.
@@ -92,7 +96,7 @@ namespace Beleg2020
 
         private static bool RegistriereProduktionseinrichtungenAmRoboter()
         {
-            return roboter.RegistriereProduktionsEinrichtungen();
+            return roboter.RegistriereProduktionsEinrichtungen(produktionseinrichtungen);
         }
         /// <summary>
         /// Diese Funktion dient nur zum Abtrennen der eigentlichen Initialisierung 
@@ -117,21 +121,28 @@ namespace Beleg2020
             // Die folgende Zeile sollten sie nicht verändern, sie kann Ihnen helfen
             if (!_internal.Check()) return;
             
-            /// Dieser Teil muss von Ihnen mit den entsprechenden Funktionsaufrufen zum 
-            /// - Initialisieren der Produktionseinrichtungen
-            /// - Registrieren der Selben am Roboter
-            /// - und Starten des Roboters, sofern die vorangegangenen Schritte erfolgreich waren
-            /// ergänzt werden
             if (InitProduktionseinrichtungen())
             {
+                Console.WriteLine("count "+produktionseinrichtungen.Count);
+                for (int i = 0; i < produktionseinrichtungen.Count; i++)
+                {
+                    Console.WriteLine("prod.einr.: " + produktionseinrichtungen[i]._Name);
+                    for(int i2=0; i2< produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte.Count; i2++)
+                    {
+                        Console.WriteLine("  " + produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte[i2].Item1 + " " + produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte[i2].Item2);
+                    }
+                }
+
                 Console.WriteLine("Initialisierung der Produktionseinrichtungen gestartet");
                 if (RegistriereProduktionseinrichtungenAmRoboter()) 
                 {
-                    Console.WriteLine("Module der Produktionseinrichtung erfolgreich am " +
-                        "Roboter angemeldet! Roboter wird gestartet");
-                   
-                    // Denken Sie daran, die Funktion zum Straten des Transportroboters einzufuegen!!!
-
+                    Console.WriteLine("Roboter wird gestartet.");
+                    // roboter starten
+                    roboter.Start();
+                }
+                else
+                {
+                    Console.WriteLine("!!! Roboter geht nicht! Roboter wird NICHT gestratet");
                 }
             }
         }       

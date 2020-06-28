@@ -6,14 +6,19 @@ namespace Beleg2020
 {
     class TransportRoboter
     {
-        public bool RegistriereProduktionsEinrichtungen()
+        public List<Produktionseinrichtung> _produktionseinrichtungen;
+
+        public bool RegistriereProduktionsEinrichtungen(List<Produktionseinrichtung> produktionseinrichtungen)
         {
+            _produktionseinrichtungen = produktionseinrichtungen;
+            Console.WriteLine("Roboter prod einr: " + _produktionseinrichtungen.Count);
             return true;
         }
 
         public void Start(){
-
+            // ???
         }
+
         /*
         private Produktionseinrichtung GetAbholbereiteProduktionseinrichtung(){
 
