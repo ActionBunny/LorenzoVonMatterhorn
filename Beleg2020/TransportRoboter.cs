@@ -11,7 +11,7 @@ namespace Beleg2020
         public bool RegistriereProduktionsEinrichtungen(List<Produktionseinrichtung> produktionseinrichtungen)
         {
             _produktionseinrichtungen = produktionseinrichtungen;
-            Console.WriteLine("Roboter prod einr: " + _produktionseinrichtungen.Count);
+            Console.WriteLine("Roboter: prod einr: " + _produktionseinrichtungen.Count);
             return true;
         }
 

@@ -1,36 +1,29 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 
 namespace Beleg2020
 {
     public class Teil
     {
-         private List<Verarbeitungsschritt> _Rezept;
-         private List<Tuple<Verarbeitungsschritt, String>> _Historie;
-         private String _Seriennummer;
-        
-         public Teil(List<Verarbeitungsschritt> rezept, String seriennummer)
-         {
+        private List<Verarbeitungsschritt> _Rezept;
+        private List<Tuple<Verarbeitungsschritt, String>> _Historie;
+        private String _Seriennummer;
+
+        public Teil(List<Verarbeitungsschritt> rezept, String seriennummer) {
             _Rezept = rezept;
             _Seriennummer = seriennummer;
-         }
-        public string GetSeriennummer()
-        {
+        }
+        public string GetSeriennummer() {
             return _Seriennummer;
         }
 
-        public Verarbeitungsschritt GetNaechsterSchritt()
-        {
+        public Verarbeitungsschritt GetNaechsterSchritt() {
             throw new NotImplementedException("Hier müssen Sie noch etwas ergänzen");
 
         }
 
-        public Verarbeitungsschritt TransferiereSchrittInHistorie(Produktionseinrichtung bearbeitetIn)
-        {
+        public Verarbeitungsschritt TransferiereSchrittInHistorie(Produktionseinrichtung bearbeitetIn) {
             // packe erstes element aus rezept in historie
             Verarbeitungsschritt schritt = _Rezept[0];
             Tuple<Verarbeitungsschritt, string> historienEintrag = new Tuple<Verarbeitungsschritt, string>(_Rezept[0], bearbeitetIn._Name);
@@ -40,13 +33,19 @@ namespace Beleg2020
             return schritt;
         }
 
-        public bool SelbstTestTeil()
-        {
-            throw new NotImplementedException("Hier sollte noch Ihr Quelltext hin!");
-        }
+        public bool SelbstTestTeil() {
+            foreach (Verarbeitungsschritt schritt in _Rezept) {
+                if (schritt == Verarbeitungsschritt.FRAESEN
+                    || schritt == Verarbeitungsschritt.LOETEN
+                    || schritt == Verarbeitungsschritt.BESCHICHTEN
+                    || schritt == Verarbeitungsschritt.TRENNEN) {
 
-        public List<Tuple<Verarbeitungsschritt,String>> LiefereHistorie()
-        {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public List<Tuple<Verarbeitungsschritt, String>> LiefereHistorie() {
             return _Historie;
         }
     }

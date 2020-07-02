@@ -11,71 +11,53 @@ namespace Beleg2020
         private Teil _aktuellesTeil;
         private Status _status;
 
-        public Fertigungsinsel(string name, List<Tuple<Verarbeitungsschritt, int>> faehigkeiten)
-        {
+        public Fertigungsinsel(string name, List<Tuple<Verarbeitungsschritt, int>> faehigkeiten) {
             _Name = name;
             _ListeAusfuehrbarerVerarbeitungsschritte = faehigkeiten;
         }
 
-        public override Status BerechneStatus()
-        {
-            if (_aktuellesTeil == null)
-            {
+        public override Status BerechneStatus() {
+            if (_aktuellesTeil == null) {
                 return Status.EMPFANGSBEREIT;
-            }
-            else
-            {
-                if (DateTime.Now > _BelegtBis)
-                {
+            } else {
+                if (DateTime.Now > _BelegtBis) {
                     return Status.ABHOLBEREIT;
-                }
-                else
-                {
+                } else {
                     return Status.BELEGT;
                 }
             }
         }
 
-        public void TeilEntgegennehmen(Teil t)
-        {
+        public void TeilEntgegennehmen(Teil t) {
             BerechneStatus();
-            if (_status == Status.EMPFANGSBEREIT)
-            {
+            if (_status == Status.EMPFANGSBEREIT) {
                 _aktuellesTeil = t;
                 // setze belegt bis
-                Verarbeitungsschritt naechsterSchritt = xxx _aktuellesTeil.GetNaechsterSchritt();
+                Verarbeitungsschritt naechsterSchritt = _aktuellesTeil.GetNaechsterSchritt();
                 int dauer = GetBearbeitungsdauerFuerSchritt(naechsterSchritt);
                 _BelegtBis = DateTime.Now.AddSeconds(dauer);
-            }
-            else
-            {
+            } else {
                 Console.WriteLine("!! Fertigungsinsel belegt. Teil kann nicht angenommen werden.");
             }
         }
 
-        public Teil TeilZurueckgeben()
-        {
+        public Teil TeilZurueckgeben() {
             BerechneStatus();
-            if (_status == Status.ABHOLBEREIT)
-            {
+            if (_status == Status.ABHOLBEREIT) {
                 Teil tempTeil = _aktuellesTeil;
                 _aktuellesTeil = null;
-                Console.WriteLine("Teil zurueck gegeben. Seriennummer: " + tempTeil.GetSeriennummer());
+                Console.WriteLine("Fertigungsinsel: Teil zurueck gegeben. Seriennummer: " + tempTeil.GetSeriennummer());
                 return tempTeil;
-            }
-            else
-            {
-                Console.WriteLine("!! Teil nicht abholbereit. Teil kann nicht zurueck gegeben werden.");
+            } else {
+                Console.WriteLine("!!! Fertigungsinsel:  Teil nicht abholbereit. Teil kann nicht zurueck gegeben werden.");
                 return null;
             }
         }
-        
+
         public int GetBearbeitungsdauerFuerSchritt(Verarbeitungsschritt schritt) {
             int dauer = 0;
-            foreach (Tuple<Verarbeitungsschritt, int> tuple in _ListeAusfuehrbarerVerarbeitungsschritte)
-            {
-                if (tuple.Item1 == schritt)
-                {
+            foreach (Tuple<Verarbeitungsschritt, int> tuple in _ListeAusfuehrbarerVerarbeitungsschritte) {
+                if (tuple.Item1 == schritt) {
                     dauer = tuple.Item2;
                 }
             }
