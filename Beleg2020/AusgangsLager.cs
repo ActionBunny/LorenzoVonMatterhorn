@@ -6,7 +6,7 @@ namespace Beleg2020
 {
     public class AusgangsLager : Produktionseinrichtung
     {
-        List<Teil> _Bestand = new List<Teil>();
+        private List<Teil> _Bestand = new List<Teil>();
 
         public AusgangsLager(string name, List<Tuple<Verarbeitungsschritt, int>> faehigkeiten) {
             _Name = name;
@@ -19,24 +19,21 @@ namespace Beleg2020
 
         private void GibHistorieAus(Teil t) {
             string serienNummer = t.GetSeriennummer();
-
-            if (!t.SelbstTestTeil()) {
-                Console.WriteLine("!!! Ausganglager: Teil mit der Seriennummer " + serienNummer + " nicht fertiggestellt.");
-                return;
-            }
-
+            
+            Console.Write("LagerAus: "+serienNummer + " ");
             foreach (Tuple<Verarbeitungsschritt, string> historienEintrag in t.LiefereHistorie()) {
-                Console.WriteLine("Ausganglager: Teil mit der Seriennummer " + serienNummer + " wurde mit Schritt " + historienEintrag.Item1 + "bearbeitet von Maschine " + historienEintrag.Item2);
+                Console.Write("( " + historienEintrag.Item1 + " - " + historienEintrag.Item2 + " );");
             }
+            Console.Write("\n");
         }
 
         public void TeilFuerDenVersandEmpfangen(Teil t) {
             _Bestand.Add(t);
-            Console.WriteLine("Ausganglager: Teil mit der Seriennummer " + t.GetSeriennummer() + " empfangen.");
+            GibHistorieAus(t);
+        }
 
-            if (!t.SelbstTestTeil()) {
-                Console.WriteLine("!!!  Ausganglager: Teil mit der Seriennummer " + t.GetSeriennummer() + " nicht fertiggestellt.");
-            }
+        public List<Teil> GetBestand() {
+            return _Bestand;
         }
     }
 }

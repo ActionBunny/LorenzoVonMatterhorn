@@ -27,7 +27,7 @@ namespace Beleg2020
                 List<Verarbeitungsschritt> rezept = new List<Verarbeitungsschritt>();
 
                 for (int i = 1; i <= 4; i++) {
-                    if(worte[i] != "") {
+                    if (worte[i] != "") {
                         rezept.Add((Verarbeitungsschritt)Enum.Parse(typeof(Verarbeitungsschritt), worte[i]));
                     }
                 }
@@ -53,15 +53,15 @@ namespace Beleg2020
 
         public void TeilZwischenlagern(Teil t) {
             _BestandZubearbeiten.Add(t);
-            Console.WriteLine("Einganglager: " + t.GetSeriennummer() + " zwischengelagert.");
+           // Console.WriteLine("Einganglager: " + t.GetSeriennummer() + " zwischengelagert.");
         }
 
         public override Status BerechneStatus() {
             if (_BestandZubearbeiten.Count == 0) {
-                Console.WriteLine("!!! Einganslager: GESTOERT.");
-                return Status.GESTOERT;
+        //        Console.WriteLine("!!! Einganslager: EMPFANGSBEREIT.");
+                return Status.EMPFANGSBEREIT;
             }
-            Console.WriteLine("Einganslager: ABHOLBEREIT.");
+        //    Console.WriteLine("Einganslager: ABHOLBEREIT.");
             return Status.ABHOLBEREIT;
         }
     }

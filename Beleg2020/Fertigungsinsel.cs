@@ -9,7 +9,6 @@ namespace Beleg2020
     {
         private DateTime _BelegtBis;
         private Teil _aktuellesTeil;
-        private Status _status;
 
         public Fertigungsinsel(string name, List<Tuple<Verarbeitungsschritt, int>> faehigkeiten) {
             _Name = name;
@@ -29,29 +28,28 @@ namespace Beleg2020
         }
 
         public void TeilEntgegennehmen(Teil t) {
-            BerechneStatus();
-            if (_status == Status.EMPFANGSBEREIT) {
-                _aktuellesTeil = t;
-                // setze belegt bis
-                Verarbeitungsschritt naechsterSchritt = _aktuellesTeil.GetNaechsterSchritt();
-                int dauer = GetBearbeitungsdauerFuerSchritt(naechsterSchritt);
-                _BelegtBis = DateTime.Now.AddSeconds(dauer);
-            } else {
-                Console.WriteLine("!! Fertigungsinsel belegt. Teil kann nicht angenommen werden.");
-            }
+            //  if (BerechneStatus() == Status.EMPFANGSBEREIT) {
+            _aktuellesTeil = t;
+            // setze belegt bis
+            Verarbeitungsschritt naechsterSchritt = _aktuellesTeil.TransferiereSchrittInHistorie(this);
+            int dauer = GetBearbeitungsdauerFuerSchritt(naechsterSchritt);
+            _BelegtBis = DateTime.Now.AddSeconds(dauer / 4.0);
+            //  } else {
+            //      Console.WriteLine("!! " + _Name + " belegt. Teil kann nicht angenommen werden.");
+            //  }
         }
 
         public Teil TeilZurueckgeben() {
-            BerechneStatus();
-            if (_status == Status.ABHOLBEREIT) {
-                Teil tempTeil = _aktuellesTeil;
-                _aktuellesTeil = null;
-                Console.WriteLine("Fertigungsinsel: Teil zurueck gegeben. Seriennummer: " + tempTeil.GetSeriennummer());
-                return tempTeil;
-            } else {
-                Console.WriteLine("!!! Fertigungsinsel:  Teil nicht abholbereit. Teil kann nicht zurueck gegeben werden.");
-                return null;
-            }
+            //   if (BerechneStatus() == Status.ABHOLBEREIT) {
+            Teil tempTeil = _aktuellesTeil;
+            _aktuellesTeil = null;
+            //       Console.WriteLine(_Name + ": Teil zurueck gegeben. Seriennummer: " + tempTeil.GetSeriennummer());
+            return tempTeil;
+
+            //   } else {
+            //       Console.WriteLine("!!!" + _Name + ": Teil nicht abholbereit. Teil kann nicht zurueck gegeben werden.");
+            //       return null;
+            //}
         }
 
         public int GetBearbeitungsdauerFuerSchritt(Verarbeitungsschritt schritt) {

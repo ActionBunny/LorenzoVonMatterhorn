@@ -16,7 +16,7 @@ namespace Beleg2020
 
         static private bool firstLine = true;
 
-        private static bool LiesKonfig(String path) {
+        private static bool LiesKonfig(string path) {
             List<Tuple<Verarbeitungsschritt, int>> ListeFähigkeitenMitDauer;
 
             Console.WriteLine("Fertigungsabteilung: Einlesen gestartet!");
@@ -82,9 +82,9 @@ namespace Beleg2020
 
             if (InitProduktionseinrichtungen()) {
                 for (int i = 0; i < produktionseinrichtungen.Count; i++) {
-                    Console.WriteLine("Fertigungsabteilung: prod.einr.: " + produktionseinrichtungen[i]._Name);
-                    for (int i2 = 0; i2 < produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte.Count; i2++) {
-                        Console.WriteLine("  " + produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte[i2].Item1 + " " + produktionseinrichtungen[i]._ListeAusfuehrbarerVerarbeitungsschritte[i2].Item2);
+                    Console.WriteLine("Fertigungsabteilung: prod.einr.: " + produktionseinrichtungen[i].GetName());
+                    for (int i2 = 0; i2 < produktionseinrichtungen[i].GetAusfuehrbareVerarbeitungsschritteUndDauer().Count; i2++) {
+                        Console.WriteLine("  " + produktionseinrichtungen[i].GetAusfuehrbareVerarbeitungsschritteUndDauer()[i2].Item1 + " " + produktionseinrichtungen[i].GetAusfuehrbareVerarbeitungsschritteUndDauer()[i2].Item2);
                     }
                 }
 
