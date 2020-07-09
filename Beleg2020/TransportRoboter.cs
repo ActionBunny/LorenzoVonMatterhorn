@@ -42,19 +42,19 @@ namespace Beleg2020
                         Console.WriteLine(_AktuellesTeil.GetSeriennummer() + " < " + prodEinr.GetName());
 
                         if (_AktuellesTeil.SelbstTestTeil()) {
-                            FindeAusgangsLager().TeilFuerDenVersandEmpfangen(_AktuellesTeil);
                             Console.WriteLine(_AktuellesTeil.GetSeriennummer() + " > LagerAus");
+                            FindeAusgangsLager().TeilFuerDenVersandEmpfangen(_AktuellesTeil);
                         } else {
 
                             Fertigungsinsel insel = GetSchnellsteFertigungsinsel();
                             // wenn es keine FI gibt die das teil verarbeiten kann
                             if (insel == null) {
-                                findeEingangsLager().TeilZwischenlagern(_AktuellesTeil);
                                 Console.WriteLine(_AktuellesTeil.GetSeriennummer() + " > LagerEin");
+                                findeEingangsLager().TeilZwischenlagern(_AktuellesTeil);
 
                             } else {
-                                insel.TeilEntgegennehmen(_AktuellesTeil);
                                 Console.WriteLine(_AktuellesTeil.GetSeriennummer() + " > " + insel.GetName());
+                                insel.TeilEntgegennehmen(_AktuellesTeil);
                             }
                         }
                     }
